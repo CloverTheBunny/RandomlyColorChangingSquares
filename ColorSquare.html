@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>10x10 Grid of Changing Squares</title>
+    <style>
+      canvas {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="myCanvas" width="200" height="200"></canvas>
+
+    <script>
+      // Get the canvas element and its context
+      var canvas = document.getElementById("myCanvas");
+      var ctx = canvas.getContext("2d");
+
+      // Define the size and color of each square
+      var squareSize = 20;
+      var colors = ["red", "green", "blue", "yellow", "purple", "orange"];
+
+      // Define the function to draw a square
+      function drawSquare(x, y, color) {
+        ctx.fillStyle = color;
+        ctx.fillRect(x, y, squareSize, squareSize);
+      }
+
+      // Define the function to generate a random color
+      function getRandomColor() {
+        return colors[Math.floor(Math.random() * colors.length)];
+      }
+
+      // Define the function to draw the grid
+      function drawGrid() {
+        // Clear the canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Calculate the starting point of the grid
+        var startX = (canvas.width - squareSize * 10) / 2;
+        var startY = (canvas.height - squareSize * 10) / 2;
+
+        // Draw the grid of squares
+        for (var i = 0; i < 10; i++) {
+          for (var j = 0; j < 10; j++) {
+            drawSquare(startX + i * squareSize, startY + j * squareSize, getRandomColor());
+          }
+        }
+      }
+
+      // Set an interval to change the colors every second
+      setInterval(drawGrid, 1000);
+    </script>
+  </body>
+</html>
